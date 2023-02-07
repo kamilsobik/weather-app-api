@@ -14,9 +14,11 @@ const visibilityOutput = document.querySelector(".visibility");
 const form = document.getElementById("locationInput");
 const search = document.querySelector(".search");
 const btn = document.querySelector(".submit");
+const getLocation = document.querySelector(".location");
 const cities = document.querySelectorAll(".city");
+let cityFromGeolocation = "";
 
-let cityInput = "Dankowice";
+let cityInput = "Wroclaw";
 
 cities.forEach((city) => {
   city.addEventListener("click", (e) => {
@@ -24,6 +26,38 @@ cities.forEach((city) => {
     fetchWeatherData();
     app.style.opacity = "0";
   });
+});
+
+getLocation.addEventListener("click", function () {
+  getCurrentGeolocation();
+
+  async function getCurrentGeolocation() {
+    if (navigator.geolocation) {
+      await window.navigator.geolocation.getCurrentPosition((locations) => {
+        const { latitude, longitude } = locations.coords;
+        console.log(latitude, longitude);
+
+        (error) => {
+          alert(error.message);
+        };
+        fetchWeatherData(latitude, longitude);
+      });
+    }
+  }
+
+  async function fetchWeatherData(latitude, longitude) {
+    await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        cityFromGeolocation = data.address.city;
+        console.log(data);
+        console.log("Jesteś w mieście: ", data.address.city);
+        console.log("cityfromgeolocation", cityFromGeolocation);
+      });
+  }
+  return;
 });
 
 form.addEventListener("submit", (e) => {
@@ -145,7 +179,5 @@ function fetchWeatherData() {
       app.style.opacity = "1";
     });
 }
-
-fetchWeatherData();
 
 app.style.opacity = "1";
