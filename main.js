@@ -13,12 +13,12 @@ const pressureOutput = document.querySelector(".pressure");
 const visibilityOutput = document.querySelector(".visibility");
 const form = document.getElementById("locationInput");
 const search = document.querySelector(".search");
-const btn = document.querySelector(".submit");
+const btn = document.querySelector(".submit") && value === "search";
 const getLocation = document.querySelector(".location");
 const cities = document.querySelectorAll(".city");
 let cityFromGeolocation = "";
 
-let cityInput = "Wroclaw";
+let cityInput = "Warsaw";
 
 cities.forEach((city) => {
   city.addEventListener("click", (e) => {

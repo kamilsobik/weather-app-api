@@ -21,13 +21,10 @@
     <div class="weather-app">
       <div class="container">
         <h3 class="brand">the weather app</h3>
-        <button type="submit" class="location">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-        </button>
         <div>
           <h1 class="temp">16&#176;</h1>
           <div class="city-time">
-            <h1 class="name">Dankowice</h1>
+            <h1 class="name">Krakow</h1>
             <small>
               <span class="time">06:09</span>
               - <span class="date">Monday Sep 19</span>
@@ -48,8 +45,11 @@
       <div class="panel">
         <form id="locationInput">
           <input type="text" class="search" placeholder="Search Location..." />
-          <button type="submit" class="submit">
+          <button type="submit" class="submit" value="search">
             <i class="fas fa-search"></i>
+          </button>
+          <button type="submit" class="location" value="loaction">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
           </button>
         </form>
         <ul class="cities">
