@@ -52,9 +52,9 @@ getLocation.addEventListener("click", function () {
       .then((response) => response.json())
       .then((data) => {
         if ((data.address.city = undefined)) {
-          cityFromGeolocation = data.address.city;
+          toNormalForm(data.address.city);
         } else {
-          cityFromGeolocation = data.address.village;
+          toNormalForm(data.address.village);
         }
         console.log(data);
         console.log("Jesteś w mieście: ", data.address.city);
@@ -66,11 +66,9 @@ getLocation.addEventListener("click", function () {
   return;
 });
 
-// function toNormalForm(string) {
-//   cityFromGeolocation = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-// }
-
-// console.log(toNormalForm("Text with ä â ë ü í ő ń"));
+function toNormalForm(string) {
+  cityFromGeolocation = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 form.addEventListener("submit", (e) => {
   if (search.value.length == 0) {
