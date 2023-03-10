@@ -13,7 +13,7 @@ const pressureOutput = document.querySelector(".pressure");
 const visibilityOutput = document.querySelector(".visibility");
 const form = document.getElementById("locationInput");
 const search = document.querySelector(".search");
-const btn = document.querySelector(".submit") && value === "search";
+const btn = document.querySelector(".submit");
 const getLocation = document.querySelector(".location");
 const cities = document.querySelectorAll(".city");
 let cityFromGeolocation = "";
