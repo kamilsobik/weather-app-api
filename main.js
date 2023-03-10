@@ -18,7 +18,7 @@ const getLocation = document.querySelector(".location");
 const cities = document.querySelectorAll(".city");
 let cityFromGeolocation = "";
 
-let cityInput = "Warsaw";
+let cityInput = "Kraków";
 
 cities.forEach((city) => {
   city.addEventListener("click", (e) => {
@@ -40,12 +40,12 @@ getLocation.addEventListener("click", function () {
         (error) => {
           alert(error.message);
         };
-        fetchWeatherData(latitude, longitude);
+        fetchCityName(latitude, longitude);
       });
     }
   }
 
-  async function fetchWeatherData(latitude, longitude) {
+  async function fetchCityName(latitude, longitude) {
     await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
     )
@@ -55,6 +55,8 @@ getLocation.addEventListener("click", function () {
         console.log(data);
         console.log("Jesteś w mieście: ", data.address.city);
         console.log("cityfromgeolocation", cityFromGeolocation);
+        cityInput = cityFromGeolocation;
+        fetchWeatherData();
       });
   }
   return;
@@ -65,7 +67,6 @@ form.addEventListener("submit", (e) => {
     alert("Please type in a city name");
   } else {
     cityInput = search.value;
-    fetchWeatherData();
     search.value = "";
     app.style.opacity = "0";
   }
