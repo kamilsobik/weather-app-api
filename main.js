@@ -51,7 +51,11 @@ getLocation.addEventListener("click", function () {
     )
       .then((response) => response.json())
       .then((data) => {
-        cityFromGeolocation = data.address.city;
+        if ((data.address.city = undefined)) {
+          cityFromGeolocation = data.address.city;
+        } else {
+          cityFromGeolocation = data.address.village;
+        }
         console.log(data);
         console.log("Jesteś w mieście: ", data.address.city);
         console.log("cityfromgeolocation", cityFromGeolocation);
@@ -62,11 +66,18 @@ getLocation.addEventListener("click", function () {
   return;
 });
 
+// function toNormalForm(string) {
+//   cityFromGeolocation = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+// }
+
+// console.log(toNormalForm("Text with ä â ë ü í ő ń"));
+
 form.addEventListener("submit", (e) => {
   if (search.value.length == 0) {
     alert("Please type in a city name");
   } else {
     cityInput = search.value;
+    fetchWeatherData();
     search.value = "";
     app.style.opacity = "0";
   }
