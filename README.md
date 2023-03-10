@@ -1,5 +1,9 @@
 # Weather app with API and Geolocation
 
+<p align="center">
+    <img src="https://i.ibb.co/kJ0Q4WK/Screenshot-2023-03-10-at-22-29-13.png" alt="Screen Shot">
+</p>
+
 
 See the live version of [Weather APP](https://weatherapp-kamilsobik.netlify.app/)
 
