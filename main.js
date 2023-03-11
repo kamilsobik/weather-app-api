@@ -67,20 +67,30 @@ getLocation.addEventListener("click", function () {
 });
 
 function toNormalForm(string) {
-  cityFromGeolocation = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return (cityFromGeolocation = string
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ł/g, "l"));
 }
 
 form.addEventListener("submit", (e) => {
   if (search.value.length == 0) {
     alert("Please type in a city name");
   } else {
-    cityInput = search.value;
+    cityInput = toNormalFormSearch(search.value);
     fetchWeatherData();
     search.value = "";
     app.style.opacity = "0";
   }
   e.preventDefault();
 });
+
+function toNormalFormSearch(string) {
+  return (cityFromGeolocation = string
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ł/g, "l"));
+}
 
 function dayOfTheWeek(day, month, year) {
   const weekday = [
