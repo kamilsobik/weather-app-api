@@ -18,7 +18,7 @@ const getLocation = document.querySelector(".location");
 const cities = document.querySelectorAll(".city");
 let cityFromGeolocation = "";
 
-let cityInput = "Kraków";
+let cityInput = "";
 
 cities.forEach((city) => {
   city.addEventListener("click", (e) => {
@@ -28,43 +28,45 @@ cities.forEach((city) => {
   });
 });
 
+getCurrentGeolocation();
+
 getLocation.addEventListener("click", function () {
   getCurrentGeolocation();
 
-  async function getCurrentGeolocation() {
-    if (navigator.geolocation) {
-      await window.navigator.geolocation.getCurrentPosition((locations) => {
-        const { latitude, longitude } = locations.coords;
-        console.log(latitude, longitude);
-
-        (error) => {
-          alert(error.message);
-        };
-        fetchCityName(latitude, longitude);
-      });
-    }
-  }
-
-  async function fetchCityName(latitude, longitude) {
-    await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if ((data.address.city = undefined)) {
-          toNormalForm(data.address.city);
-        } else {
-          toNormalForm(data.address.village);
-        }
-        console.log(data);
-        console.log("Jesteś w mieście: ", data.address.city);
-        console.log("cityfromgeolocation", cityFromGeolocation);
-        cityInput = cityFromGeolocation;
-        fetchWeatherData();
-      });
-  }
   return;
 });
+
+async function getCurrentGeolocation() {
+  if (navigator.geolocation) {
+    await window.navigator.geolocation.getCurrentPosition((locations) => {
+      const { latitude, longitude } = locations.coords;
+      console.log(latitude, longitude);
+
+      (error) => {
+        alert(error.message);
+      };
+      fetchCityName(latitude, longitude);
+    });
+  }
+}
+
+async function fetchCityName(latitude, longitude) {
+  await fetch(
+    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      if ((data.address.city = undefined)) {
+        toNormalForm(data.address.city);
+      } else {
+        toNormalForm(data.address.village);
+      }
+      console.log(data);
+      console.log("cityfromgeolocation", cityFromGeolocation);
+      cityInput = cityFromGeolocation;
+      fetchWeatherData();
+    });
+}
 
 function toNormalForm(string) {
   return (cityFromGeolocation = string
