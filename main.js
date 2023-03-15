@@ -41,7 +41,6 @@ async function getCurrentGeolocation() {
     await window.navigator.geolocation.getCurrentPosition((locations) => {
       const { latitude, longitude } = locations.coords;
       console.log(latitude, longitude);
-
       (error) => {
         alert(error.message);
       };
@@ -56,6 +55,8 @@ async function fetchCityName(latitude, longitude) {
   )
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
+
       if ((data.address.city = undefined)) {
         toNormalForm(data.address.city);
       } else {

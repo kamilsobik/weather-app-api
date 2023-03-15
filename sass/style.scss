@@ -65,6 +65,7 @@ h3 {
   margin: 0;
   margin-bottom: 0.2em;
   font-size: 3em;
+  width: 60%;
 }
 
 .temp {
@@ -201,6 +202,11 @@ h3 {
     width: 100%;
     top: initial;
   }
+
+  .city-time h1 {
+    font-size: 2, 5em;
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -209,6 +215,9 @@ h3 {
   }
   .submit {
     right: 60px;
+  }
+  .city-time h1 {
+    font-size: 2em;
   }
 }
 
