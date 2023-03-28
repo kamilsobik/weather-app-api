@@ -40,7 +40,6 @@ async function getCurrentGeolocation() {
   if (navigator.geolocation) {
     await window.navigator.geolocation.getCurrentPosition((locations) => {
       const { latitude, longitude } = locations.coords;
-      console.log(latitude, longitude);
       (error) => {
         alert(error.message);
       };
@@ -55,15 +54,12 @@ async function fetchCityName(latitude, longitude) {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-
-      if ((data.address.city = undefined)) {
+      if (data.address.city != undefined) {
         toNormalForm(data.address.city);
       } else {
         toNormalForm(data.address.village);
       }
-      console.log(data);
-      console.log("cityfromgeolocation", cityFromGeolocation);
+
       cityInput = cityFromGeolocation;
       fetchWeatherData();
     });
@@ -114,7 +110,6 @@ function fetchWeatherData() {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       temp.innerHTML = data.current.temp_c + "&#176;";
       conditionOutput.innerHTML = data.current.condition.text;
       const date = data.location.localtime;
